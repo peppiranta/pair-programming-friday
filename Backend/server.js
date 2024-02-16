@@ -1,11 +1,11 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
-const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
-const saltRounds = 10;
-require("dotenv").config();
-const User = require("./models/userModel");
 const app = express();
+const mongoose = require("mongoose");
+const cors = require("cors");
+require("dotenv").config();
+
+app.use(cors());
 app.use(express.json());
 
 // Connect to MongoDB database
@@ -15,6 +15,8 @@ mongoose
   .catch((err) => console.error("Failed to connect to MongoDB", err));
 
 app.use("/api/users", require("./routes/route"));
+
+app.use("/api/protectedroute", require("./routes/protectedRoute"));
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {

@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const generateToken = require("../middleware/jwt");
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 // Create a new token
 const createToken = (_id) => {
